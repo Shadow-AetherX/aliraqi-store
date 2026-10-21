@@ -2,179 +2,215 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="كتالوج جملة إلكتروني لشركة العراقي للاستيراد وتجارة الأدوات المنزلية — تصفح المنتجات بالقطعة أو بالكرتونة واطلب مباشرة عبر واتساب.">
-<title>AL-IRAQI HOME APPLIANCES | كتالوج الجملة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>العراقي ستور | كتالوج القطاعي</title>
+<meta name="description" content="كتالوج قطاعي إلكتروني للعراقي ستور — أدوات منزلية مستوردة بأسعار مناسبة بالقطعة، واطلب مباشرة عبر واتساب.">
+<meta name="theme-color" content="#13325f">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_EG">
+<meta property="og:title" content="العراقي ستور | كتالوج القطاعي">
+<meta property="og:description" content="كتالوج قطاعي إلكتروني للعراقي ستور — أدوات منزلية مستوردة بأسعار مناسبة بالقطعة، واطلب مباشرة عبر واتساب.">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="apple-touch-icon" href="logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://wsrv.nl" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-mode="retail">
 
-  <!-- ===== الهيدر ===== -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">
-        <div class="brand-en">AL-IRAQI <span>HOME APPLIANCES</span></div>
-        <div class="brand-ar">العراقي للاستيراد وتجارة الأدوات المنزلية</div>
-      </div>
-      <button class="cart-btn" id="cartBtn" type="button" aria-label="سلة الطلب">
-        <span class="cart-icon">🧾</span>
-        <span class="cart-label">طلبك</span>
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-    </div>
-
-    <div class="control-bar">
-      <div class="search-wrap">
-        <span class="search-icon">⌕</span>
-        <input type="text" id="searchInput" placeholder="ابحث بالاسم، الكود، أو النوع…" autocomplete="off" aria-label="ابحث عن المنتجات بالاسم، الكود، أو النوع">
-      </div>
-
-      <div class="dropdown-filter" id="categoryDropdown">
-        <button class="dropdown-toggle" id="categoryToggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="categoryMenu">
-          <span class="dropdown-icon">📂</span>
-          <span class="dropdown-label" id="categoryLabel">كل الأقسام</span>
-          <span class="dropdown-arrow">▾</span>
-        </button>
-        <ul class="dropdown-menu" id="categoryMenu" role="listbox" hidden>
-          <!-- تُبنى تلقائياً من الأصناف -->
-        </ul>
-      </div>
-
-      <select id="sortSelect" class="sort-select" aria-label="ترتيب المنتجات">
-        <option value="default">الترتيب الافتراضي</option>
-        <option value="price-asc">السعر: من الأقل للأعلى</option>
-        <option value="price-desc">السعر: من الأعلى للأقل</option>
-        <option value="newest">الأحدث أولاً</option>
-      </select>
-    </div>
-  </header>
-
-  <!-- ===== حالة التحميل ===== -->
-  <div class="empty-state" id="loadingState">
-    <span>⏳</span>
-    <p>جاري تحميل المنتجات…</p>
+<!-- ===== الهيدر (بيمشي مع الصفحة) ===== -->
+<header class="site-header">
+  <div class="brand-row">
+    <a class="brand" href="./" aria-label="العراقي ستور">
+      <img class="brand-logo" src="logo.svg" alt="" width="56" height="56">
+      <span class="brand-text">
+        <span class="brand-ar">العراقي ستور</span>
+        <span class="brand-en">AL-IRAQI STORE <i>•</i> كتالوج القطاعي</span>
+      </span>
+    </a>
+    <button class="icon-btn" id="feedbackBtn" type="button" aria-label="اكتب ملاحظة أو مشكلة" title="ملاحظاتك تهمنا">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-4.2 3.6a.6.6 0 0 1-1-.46V16H6.5A2.5 2.5 0 0 1 4 13.5v-8Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.5 8.5h7M8.5 11.5h4.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+    </button>
   </div>
+  <form class="search" id="searchForm" role="search" autocomplete="off">
+    <input type="search" id="searchInput" placeholder="ابحث بالاسم أو كود المنتج…" aria-label="ابحث بالاسم أو كود المنتج" enterkeyhint="search">
+    <button type="submit" class="search-btn">بحث</button>
+  </form>
+</header>
 
-  <!-- ===== حالة فشل التحميل ===== -->
-  <div class="empty-state" id="loadErrorState" hidden>
-    <span>⚠️</span>
-    <p>تعذر تحميل المنتجات. تحقق من الاتصال وحاول مرة أخرى.</p>
-    <button id="retryLoadBtn" type="button">إعادة المحاولة</button>
+<!-- ===== الشريط الثابت: زرار الأقسام + شرائح الأقسام ===== -->
+<nav class="nav-bar" id="navBar" aria-label="الأقسام">
+  <div class="nav-inner">
+    <button class="grid-btn" id="catGridBtn" type="button" aria-haspopup="dialog" aria-label="كل التصنيفات" title="كل التصنيفات">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2.2" fill="currentColor"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2.2" fill="currentColor"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2.2" fill="currentColor"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2.2" fill="currentColor"/></svg>
+    </button>
+    <div class="chips" id="chips" role="tablist" aria-label="تصفية حسب القسم"></div>
   </div>
+</nav>
 
-  <!-- ===== حالة عدم وجود منتجات في المصدر ===== -->
-  <div class="empty-state" id="noProductsState" hidden>
-    <span>📦</span>
-    <p>لا توجد منتجات متاحة حالياً.</p>
+<!-- ===== المحتوى ===== -->
+<main class="catalog" id="catalog">
+  <div class="state" id="loadingState" aria-live="polite">
+    <div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>
   </div>
-
-  <!-- ===== حالة عدم توفر نتائج بحث ===== -->
-  <div class="empty-state" id="emptyState" hidden>
-    <span>📭</span>
+  <div class="state state-msg" id="errorState" hidden>
+    <b>⚠️</b>
+    <p>تعذّر تحميل المنتجات. تأكد من الاتصال بالإنترنت وحاول تاني.</p>
+    <button type="button" class="btn-outline" id="retryBtn">إعادة المحاولة</button>
+  </div>
+  <div class="state state-msg" id="emptyData" hidden>
+    <b>📦</b>
+    <p>لا توجد منتجات متاحة حاليًا.</p>
+  </div>
+  <div class="state state-msg" id="noResults" hidden>
+    <b>🔍</b>
     <p>مفيش أصناف مطابقة للبحث ده</p>
-    <button id="resetFilters" type="button">إلغاء الفلاتر</button>
+    <button type="button" class="btn-outline" id="resetBtn">عرض كل المنتجات</button>
   </div>
+  <div id="grid" hidden></div>
+</main>
 
-  <!-- ===== شبكة المنتجات ===== -->
-  <main class="catalog-grid" id="catalogGrid" aria-live="polite" hidden></main>
-
-  <!-- ===== قالب كارت المنتج (يُستنسخ بالجافاسكريبت) ===== -->
-  <template id="cardTemplate">
-    <article class="product-card">
-      <div class="card-media">
-        <img class="card-img" src="" alt="" loading="lazy" decoding="async">
-        <div class="gallery-nav" hidden>
-          <button type="button" class="gallery-arrow prev" aria-label="الصورة السابقة">‹</button>
-          <button type="button" class="gallery-arrow next" aria-label="الصورة التالية">›</button>
-        </div>
-        <div class="gallery-dots" hidden></div>
-        <span class="carton-stamp"><b class="qty-num"></b><small>قطعة/كرتونة</small></span>
-        <span class="avail-flag"></span>
-      </div>
-      <div class="card-body">
-        <div class="card-meta-row">
-          <span class="card-category"></span>
-          <span class="card-itemid"></span>
-        </div>
-        <h3 class="card-name"></h3>
-        <p class="card-desc"></p>
-
-        <!-- مفتاح الاختيار بين القطعة والكرتونة -->
-        <div class="unit-switch" role="group" aria-label="طريقة الشراء">
-          <button type="button" class="unit-btn" data-unit="piece">بالقطعة</button>
-          <button type="button" class="unit-btn active" data-unit="carton">بالكرتونة</button>
-        </div>
-
-        <div class="card-footer">
-          <div class="price-tag">
-            <span class="price-value"></span>
-            <small class="price-unit-label">للكرتونة</small>
-          </div>
-          <div class="qty-stepper">
-            <button class="step-btn minus" type="button" aria-label="تقليل">−</button>
-            <input type="number" class="qty-input" value="1" min="1" step="1" inputmode="numeric" aria-label="الكمية">
-            <button class="step-btn plus" type="button" aria-label="زيادة">+</button>
-          </div>
-        </div>
-
-        <div class="line-total">
-          <span>الإجمالي</span>
-          <b class="line-total-value"></b>
-        </div>
-
-        <div class="card-actions">
-          <button class="btn-add" type="button">أضف للطلب</button>
-          <button class="btn-whatsapp" type="button">اطلب عبر واتساب</button>
-        </div>
-      </div>
-    </article>
-  </template>
-
-  <!-- ===== لايت بوكس الصورة ===== -->
-  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="تكبير صورة المنتج">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="إغلاق">✕</button>
-    <button class="lightbox-arrow prev" id="lightboxPrev" type="button" aria-label="الصورة السابقة" hidden>‹</button>
-    <img id="lightboxImg" src="" alt="" loading="lazy" decoding="async">
-    <button class="lightbox-arrow next" id="lightboxNext" type="button" aria-label="الصورة التالية" hidden>›</button>
-    <span class="lightbox-counter" id="lightboxCounter" hidden></span>
+<footer class="site-footer">
+  <img src="logo.svg" alt="" width="44" height="44">
+  <div>
+    <b>العراقي ستور</b>
+    <p>استيراد مباشر وتوريد الأدوات المنزلية.</p>
   </div>
+  <button type="button" class="btn-outline" id="feedbackBtn2">💬 اكتب ملاحظتك أو مشكلتك</button>
+</footer>
 
-  <!-- ===== سلة الطلب (منزلقة) ===== -->
-  <aside class="cart-panel" id="cartPanel" aria-hidden="true" role="dialog" aria-modal="true" aria-label="بيان الطلب">
-    <div class="cart-header">
-      <h2>بيان الطلب</h2>
-      <button id="cartClose" type="button" aria-label="إغلاق السلة">✕</button>
+<!-- ===== زراير عائمة ===== -->
+<div class="fabs" id="fabs">
+  <button class="fab fab-top" id="topBtn" type="button" aria-label="الرجوع لأعلى الصفحة" title="لأعلى">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <a class="fab fab-wa" id="waFab" href="#" target="_blank" rel="noopener" aria-label="تواصل معنا عبر واتساب" title="واتساب">
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M16.02 3C8.84 3 3 8.82 3 15.98c0 2.29.6 4.52 1.74 6.49L3 29l6.7-1.71a13 13 0 0 0 6.32 1.62h.01C23.2 28.91 29 23.1 29 15.94 29 8.78 23.2 3 16.02 3Zm0 23.7h-.01a10.8 10.8 0 0 1-5.5-1.5l-.4-.23-3.98 1.02 1.06-3.88-.26-.4a10.7 10.7 0 0 1-1.65-5.7c0-5.95 4.86-10.8 10.84-10.8 2.9 0 5.62 1.12 7.67 3.17a10.7 10.7 0 0 1 3.17 7.64c0 5.96-4.88 10.7-10.94 10.7Zm5.95-8.1c-.33-.16-1.93-.95-2.23-1.06-.3-.11-.52-.16-.74.17-.22.32-.85 1.06-1.04 1.28-.19.22-.38.24-.7.08-.33-.16-1.38-.51-2.62-1.62a9.8 9.8 0 0 1-1.81-2.25c-.19-.33-.02-.5.14-.66.15-.15.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.16-.74-1.78-1.01-2.44-.27-.64-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.41-.3.33-1.14 1.11-1.14 2.71 0 1.6 1.17 3.15 1.33 3.37.16.22 2.3 3.5 5.57 4.91.78.34 1.38.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.63-.38Z"/></svg>
+  </a>
+</div>
+
+<!-- ===== شريط الطلب السفلي ===== -->
+<section class="order-bar" id="orderBar" hidden aria-label="ملخص الطلب">
+  <p class="order-line" id="orderLine"></p>
+  <div class="order-actions">
+    <button type="button" class="btn-primary" id="reviewBtn">مراجعة الطلب وإرساله</button>
+    <button type="button" class="btn-outline" id="clearBtn">إفراغ الطلب</button>
+  </div>
+</section>
+
+<!-- ===== شاشة كل التصنيفات ===== -->
+<div class="sheet-root" id="catSheet" hidden>
+  <div class="sheet-overlay" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="catSheetTitle">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-head">
+      <h2 id="catSheetTitle">كل التصنيفات</h2>
+      <button type="button" class="close-btn" data-close aria-label="إغلاق">✕</button>
     </div>
-    <div class="cart-items" id="cartItems">
-      <p class="cart-empty-msg">لسه ما ضفتش أي أصناف للطلب</p>
+    <div class="sheet-body cat-list" id="catList"></div>
+  </div>
+</div>
+
+<!-- ===== مراجعة الطلب ===== -->
+<div class="sheet-root sheet-tall" id="reviewSheet" hidden>
+  <div class="sheet-overlay" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+    <div class="sheet-head">
+      <h2 id="reviewTitle">طلب قطاعي — العراقي ستور</h2>
+      <button type="button" class="close-btn" data-close aria-label="إغلاق">✕</button>
     </div>
-    <div class="cart-summary">
-      <div class="cart-total-row">
-        <span>إجمالي الكراتين</span>
-        <b id="cartTotalCartons">0</b>
+    <div class="sheet-body" id="reviewBody">
+      <div class="customer-box">
+        <label for="custName">اسم العميل / المحل <em>*</em></label>
+        <input type="text" id="custName" maxlength="60" placeholder="اكتب اسم العميل أو المحل" autocomplete="name">
+        <small class="hint" id="custNameHint" hidden></small>
+        <label for="custPhone">رقم الجوال <em>*</em></label>
+        <input type="tel" id="custPhone" maxlength="20" inputmode="tel" placeholder="مثال: 01012345678" autocomplete="tel">
+        <small class="hint" id="custPhoneHint" hidden></small>
       </div>
-      <div class="cart-total-row">
-        <span>إجمالي القطع المفردة</span>
-        <b id="cartTotalPieces">0</b>
-      </div>
-      <div class="cart-total-row cart-total-price">
-        <span>الإجمالي التقديري</span>
-        <b id="cartTotalPrice">0 ج.م</b>
-      </div>
-      <button class="btn-checkout" id="checkoutBtn" type="button">إرسال الطلب عبر واتساب</button>
+      <div id="reviewLines"></div>
     </div>
-  </aside>
+    <div class="sheet-foot">
+      <div class="review-total">
+        <span id="reviewSummary"></span>
+        <b id="reviewGrand"></b>
+      </div>
+      <button type="button" class="btn-wa" id="sendWaBtn">
+        <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M16.02 3C8.84 3 3 8.82 3 15.98c0 2.29.6 4.52 1.74 6.49L3 29l6.7-1.71a13 13 0 0 0 6.32 1.62h.01C23.2 28.91 29 23.1 29 15.94 29 8.78 23.2 3 16.02 3Zm5.95 14.9c-.33-.16-1.93-.95-2.23-1.06-.3-.11-.52-.16-.74.17-.22.32-.85 1.06-1.04 1.28-.19.22-.38.24-.7.08-.33-.16-1.38-.51-2.62-1.62a9.8 9.8 0 0 1-1.81-2.25c-.19-.33-.02-.5.14-.66.15-.15.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.16-.74-1.78-1.01-2.44-.27-.64-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.41-.3.33-1.14 1.11-1.14 2.71 0 1.6 1.17 3.15 1.33 3.37.16.22 2.3 3.5 5.57 4.91.78.34 1.38.54 1.86.69.78.25 1.49.21 2.05.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.41.19-1.55-.08-.14-.3-.22-.63-.38Z"/></svg>
+        إرسال الطلب على واتساب
+      </button>
+      <div class="foot-row">
+        <button type="button" class="btn-outline" id="pdfBtn">تصدير PDF</button>
+        <button type="button" class="btn-outline" data-close>رجوع للكتالوج</button>
+      </div>
+    </div>
+    <div class="busy" id="busy" hidden role="status" aria-live="polite">
+      <div class="busy-box"><span class="spinner" aria-hidden="true"></span><p id="busyText">جاري تجهيز الملف…</p></div>
+    </div>
+  </div>
+</div>
 
-  <!-- طبقة التعتيم: مخفية تماماً لحد ما السلة تتفتح -->
-  <div class="cart-overlay" id="cartOverlay" hidden></div>
+<!-- ===== الملاحظات والتعليقات ===== -->
+<div class="sheet-root" id="feedbackSheet" hidden>
+  <div class="sheet-overlay" data-close></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-head">
+      <h2 id="fbTitle">ملاحظاتك تهمنا</h2>
+      <button type="button" class="close-btn" data-close aria-label="إغلاق">✕</button>
+    </div>
+    <form class="sheet-body fb-form" id="fbForm" novalidate>
+      <p class="fb-intro">واجهتك مشكلة في الموقع؟ عندك اقتراح أو كلمة حلوة؟ اكتبها هنا وهتوصلنا مباشرة.</p>
+      <div class="fb-types" role="radiogroup" aria-label="نوع الملاحظة">
+        <label><input type="radio" name="fbType" value="مشكلة" checked><span>🛠️ مشكلة</span></label>
+        <label><input type="radio" name="fbType" value="اقتراح"><span>💡 اقتراح</span></label>
+        <label><input type="radio" name="fbType" value="شكر"><span>👍 شكر</span></label>
+        <label><input type="radio" name="fbType" value="أخرى"><span>✉️ أخرى</span></label>
+      </div>
+      <label for="fbMsg">رسالتك <em>*</em></label>
+      <textarea id="fbMsg" rows="4" maxlength="800" placeholder="اكتب تفاصيل الملاحظة…"></textarea>
+      <small class="hint" id="fbMsgHint" hidden></small>
+      <div class="fb-two">
+        <div><label for="fbName">اسمك (اختياري)</label><input type="text" id="fbName" maxlength="60" autocomplete="name"></div>
+        <div><label for="fbPhone">جوالك (اختياري)</label><input type="tel" id="fbPhone" maxlength="20" inputmode="tel" autocomplete="tel"></div>
+      </div>
+      <input type="text" id="fbWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="btn-primary" id="fbSend">إرسال الملاحظة</button>
+      <p class="fb-note" id="fbNote"></p>
+    </form>
+  </div>
+</div>
 
-  <!-- ===== إشعارات سريعة (Toast) ===== -->
-  <div class="toast-container" id="toastContainer" role="status" aria-live="polite" aria-atomic="true"></div>
+<!-- ===== تكبير الصورة ===== -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="تكبير صورة المنتج">
+  <button class="lb-close" id="lbClose" type="button" aria-label="إغلاق">✕</button>
+  <button class="lb-arrow prev" id="lbPrev" type="button" aria-label="الصورة السابقة" hidden>›</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-arrow next" id="lbNext" type="button" aria-label="الصورة التالية" hidden>‹</button>
+  <span class="lb-counter" id="lbCounter" dir="ltr"></span>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-  <script src="script.js"></script>
+<!-- ===== رسالة الترحيب ===== -->
+<div class="welcome" id="welcome" hidden>
+  <div class="welcome-overlay" data-close></div>
+  <div class="welcome-card" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <button type="button" class="welcome-x" data-close aria-label="إغلاق الرسالة">✕</button>
+    <div class="welcome-art" id="welcomeArt">
+      <img src="logo.svg" alt="" width="84" height="84">
+    </div>
+    <h2 id="welcomeTitle">أهلًا بيك في العراقي ستور</h2>
+    <p class="welcome-sub">كتالوج القطاعي — الطلب بالقطعة</p>
+    <ul class="welcome-points"><li><span>🛍️</span>أسعار القطاعي بالقطعة</li><li><span>✨</span>أحدث الموديلات وأجود الخامات</li><li><span>💬</span>ابعت طلبك على واتساب في ثواني</li></ul>
+    <button type="button" class="btn-primary" id="welcomeGo">ابدأ التصفح</button>
+    <p class="welcome-foot">لو واجهتك أي مشكلة اضغط على أيقونة 💬 أعلى الصفحة واكتب لنا.</p>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
